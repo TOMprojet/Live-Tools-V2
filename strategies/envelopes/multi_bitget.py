@@ -307,7 +307,7 @@ async def main():
                     side=invert_side[position.side],
                     price=row["ma_base"],
                     size=exchange.amount_to_precision(position.pair, position.size),
-                    type="limit",
+                    type="market",
                     reduce=True,
                     margin_mode=margin_mode,
                     error=False,
