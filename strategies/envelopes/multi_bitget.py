@@ -15,7 +15,7 @@ if sys.platform == "win32":
 async def main():
     account = ACCOUNTS["bitget1"]
 
-    margin_mode = "isolated"  # isolated or crossed
+    margin_mode = "crossed"  # isolated or crossed
     exchange_leverage = 5
 
     tf = "1h"
