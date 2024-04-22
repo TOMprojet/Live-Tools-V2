@@ -15,7 +15,7 @@ if sys.platform == "win32":
 async def main():
     account = ACCOUNTS["bitget1"]
 
-    margin_mode = "crossed"  # isolated or crossed
+    margin_mode = "isolated"  # isolated or crossed
     exchange_leverage = 5
 
     tf = "1h"
@@ -410,11 +410,14 @@ async def main():
             for i in range(len(params[pair]["envelopes"])):
                 if "long" in params[pair]["sides"]:
                     tasks_open.append(
-                        exchange.place_order(
+                        exchange.place_trigger_order(
                             pair=pair,
                             side="buy",
                             price=exchange.price_to_precision(
                                 pair, row[f"ma_low_{i+1}"]
+                            ),
+                            trigger_price=exchange.price_to_precision(
+                                pair, row[f"ma_low_{i+1}"] * 1.005
                             ),
                             size=exchange.amount_to_precision(
                                 pair,
@@ -433,9 +436,12 @@ async def main():
                     )
                 if "short" in params[pair]["sides"]:
                     tasks_open.append(
-                        exchange.place_order(
+                        exchange.place_trigger_order(
                             pair=pair,
                             side="sell",
+                            trigger_price=exchange.price_to_precision(
+                                pair, row[f"ma_high_{i+1}"] * 0.995
+                            ),
                             price=exchange.price_to_precision(
                                 pair, row[f"ma_high_{i+1}"]
                             ),
