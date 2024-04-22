@@ -15,168 +15,154 @@ if sys.platform == "win32":
 async def main():
     account = ACCOUNTS["bitget1"]
 
-    margin_mode = "isolated"  # isolated or crossed
-    exchange_leverage = 3
+    margin_mode = "crossed"  # isolated or crossed
+    exchange_leverage = 5
 
     tf = "1h"
-    size_leverage = 3
+    size_leverage = 7
     sl = 0.3
     params = {
         "BTC/USDT": {
             "src": "close",
             "ma_base_window": 7,
-            "envelopes": [0.07, 0.1, 0.15],
+            "envelopes": [0.07, 0.09, 0.12],
             "size": 0.1,
             "sides": ["long", "short"],
         },
         "ETH/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15],
+            "envelopes": [0.07, 0.09, 0.12],
             "size": 0.1,
             "sides": ["long", "short"],
         },
         "ADA/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.09, 0.12, 0.15],
-            "size": 0.1,
+            "envelopes": [0.09, 0.12, 0.15],
+            "size": 0.05,
             "sides": ["long", "short"],
         },
         "AVAX/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.09, 0.12, 0.15],
+            "envelopes": [0.09, 0.12, 0.15],
+            "size": 0.05,
+            "sides": ["long", "short"],
+        },
+        "SOL/USDT": {
+            "src": "close",
+            "ma_base_window": 5,
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.1,
             "sides": ["long", "short"],
         },
-        "EGLD/USDT": {
+        "MATIC/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "KSM/USDT": {
+        "XRP/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "OCEAN/USDT": {
+        "LINK/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "REN/USDT": {
+        "LTC/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "ACH/USDT": {
+        "ATOM/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "APE/USDT": {
+        "NEAR/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "CRV/USDT": {
+        "ARB/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.1],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "DOGE/USDT": {
+        "TIA/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "ENJ/USDT": {
+        "ALGO/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "FET/USDT": {
+        "FIL/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "ICP/USDT": {
+        "APT/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-        "IMX/USDT": {
+        "INJ/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
-            "size": 0.05,
-            "sides": ["long", "short"],
-        },
-        "LDO/USDT": {
-            "src": "close",
-            "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
-            "size": 0.05,
-            "sides": ["long", "short"],
-        },
-        "MAGIC/USDT": {
-            "src": "close",
-            "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
-            "size": 0.05,
-            "sides": ["long", "short"],
-        },
-        "REEF/USDT": {
-            "src": "close",
-            "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
         "SAND/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
         "TRX/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
         "XTZ/USDT": {
             "src": "close",
             "ma_base_window": 5,
-            "envelopes": [0.07, 0.1, 0.15, 0.2],
+            "envelopes": [0.09, 0.12, 0.15],
             "size": 0.05,
             "sides": ["long", "short"],
         },
-    }
+}
 
     exchange = PerpBitget(
         public_api=account["public_api"],
@@ -424,14 +410,11 @@ async def main():
             for i in range(len(params[pair]["envelopes"])):
                 if "long" in params[pair]["sides"]:
                     tasks_open.append(
-                        exchange.place_trigger_order(
+                        exchange.place_order(
                             pair=pair,
                             side="buy",
                             price=exchange.price_to_precision(
                                 pair, row[f"ma_low_{i+1}"]
-                            ),
-                            trigger_price=exchange.price_to_precision(
-                                pair, row[f"ma_low_{i+1}"] * 1.005
                             ),
                             size=exchange.amount_to_precision(
                                 pair,
@@ -450,12 +433,9 @@ async def main():
                     )
                 if "short" in params[pair]["sides"]:
                     tasks_open.append(
-                        exchange.place_trigger_order(
+                        exchange.place_order(
                             pair=pair,
                             side="sell",
-                            trigger_price=exchange.price_to_precision(
-                                pair, row[f"ma_high_{i+1}"] * 0.995
-                            ),
                             price=exchange.price_to_precision(
                                 pair, row[f"ma_high_{i+1}"]
                             ),
