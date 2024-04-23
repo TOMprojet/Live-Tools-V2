@@ -301,10 +301,26 @@ async def main():
                 f"Current position on {position.pair} {position.side} - {position.size} ~ {position.usd_size} $"
             )
             row = df_list[position.pair].iloc[-2]
-            tasks_close.append(
-                exchange.place_order(
+            if position.side == "long":
+                tasks_close.append(
+                exchange.place_trigger_order(
                     pair=position.pair,
                     side=invert_side[position.side],
+                    trigger_price=row["ma_base"] * 0.995,
+                    price=row["ma_base"],
+                    size=exchange.amount_to_precision(position.pair, position.size),
+                    type="market",
+                    reduce=True,
+                    margin_mode=margin_mode,
+                    error=False,
+                )
+            )  
+            elif position.side == "short":
+                tasks_close.append(
+                exchange.place_trigger_order(
+                    pair=position.pair,
+                    side=invert_side[position.side],
+                    trigger_price=row["ma_base"] * 1.005,
                     price=row["ma_base"],
                     size=exchange.amount_to_precision(position.pair, position.size),
                     type="market",
