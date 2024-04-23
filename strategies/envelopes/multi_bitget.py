@@ -306,8 +306,8 @@ async def main():
                 exchange.place_trigger_order(
                     pair=position.pair,
                     side=invert_side[position.side],
-                    trigger_price=row["ma_base"] * 0.995,
-                    price=row["ma_base"],
+                    trigger_price=exchange.price_to_precision(position.pair,row["ma_base"] * 0.995),
+                    price=exchange.price_to_precision(position.pair,row["ma_base"]),
                     size=exchange.amount_to_precision(position.pair, position.size),
                     type="market",
                     reduce=True,
@@ -320,8 +320,8 @@ async def main():
                 exchange.place_trigger_order(
                     pair=position.pair,
                     side=invert_side[position.side],
-                    trigger_price=row["ma_base"] * 1.005,
-                    price=row["ma_base"],
+                    trigger_price=exchange.price_to_precision(position.pair,row["ma_base"] * 1.005),
+                    price=exchange.price_to_precision(position.pair,row["ma_base"]),
                     size=exchange.amount_to_precision(position.pair, position.size),
                     type="market",
                     reduce=True,
