@@ -57,7 +57,7 @@ async def main():
             "size": 0.1,
             "sides": ["long", "short"],
         },
-        "MATIC/USDT": {
+        "POL/USDT": {
             "src": "close",
             "ma_base_window": 5,
             "envelopes": [0.09, 0.12, 0.15],
